@@ -1,9 +1,8 @@
 package org.firstinspires.ftc.teamcode;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Gamepad;
 
 @TeleOp
 public class teleOpMode extends OpMode {
@@ -13,21 +12,17 @@ public class teleOpMode extends OpMode {
     double power = .7;
     boolean toggle = false;
 
-    Robot robot = new Robot();
+
 
     @Override
     public void init() {
+        frontLeft = hardwareMap.dcMotor.get("Front Left");
+        frontRight = hardwareMap.dcMotor.get("Front Right");
+        backLeft = hardwareMap.dcMotor.get("Back Left");
+        backRight = hardwareMap.dcMotor.get("Back Right");
 
-//        frontLeft = hardwareMap.dcMotor.get("Front Left");
-//        frontRight = hardwareMap.dcMotor.get("Front Right");
-//        backLeft = hardwareMap.dcMotor.get("Back Left");
-//        backRight = hardwareMap.dcMotor.get("Back Right");
-//
 //        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 //        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        robot.initializeHardware();
-
     }
 
     @Override
@@ -74,16 +69,16 @@ public class teleOpMode extends OpMode {
 
         }
 
-//        if (gamepad1.a && !toggle) {
-//            toggle = true;
-//            if (toggle) {
-//                power /= 2;
-//                toggle = false;
-//            }
-//            else if (gamepad1.a && toggle) {
-//                power *= 2;
-//                toggle = false;
-//            }
-//        }
+        if (gamepad1.a && !toggle) {
+            toggle = false;
+            if (toggle) {
+                power /= 2;
+                toggle = false;
+            }
+            else if (gamepad1.a && toggle) {
+                power *= 2;
+                toggle = false;
+            }
+        }
     }
 }
