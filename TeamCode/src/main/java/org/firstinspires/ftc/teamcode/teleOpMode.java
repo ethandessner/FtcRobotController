@@ -7,12 +7,13 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @TeleOp
 public class teleOpMode extends OpMode {
 
-    DcMotor frontLeft, frontRight, backLeft, backRight;
+    DcMotor frontLeft, frontRight, backLeft, backRight, tread, fire;
 
-    double power = .7;
-    boolean toggle = false;
-
-
+    double power = 1.0;
+    boolean toggle = true;
+    int tap = 0;
+//    boolean start = false;
+    double power2 = 1.0;
 
     @Override
     public void init() {
@@ -20,7 +21,9 @@ public class teleOpMode extends OpMode {
         frontRight = hardwareMap.dcMotor.get("Front Right");
         backLeft = hardwareMap.dcMotor.get("Back Left");
         backRight = hardwareMap.dcMotor.get("Back Right");
-
+        tread = hardwareMap.dcMotor.get("Tread");
+        fire = hardwareMap.dcMotor.get("Fire");
+//        start = true;
 //        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 //        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
     }
@@ -28,57 +31,106 @@ public class teleOpMode extends OpMode {
     @Override
     public void loop() {
 
-        frontLeft.setPower(gamepad1.left_stick_y * power);
-        frontRight.setPower(gamepad1.right_stick_y * power);
-        backLeft.setPower(gamepad1.left_stick_y * power);
-        backRight.setPower(gamepad1.right_stick_y * power);
+            frontLeft.setPower(gamepad1.left_stick_y * power);
+            frontRight.setPower(gamepad1.right_stick_y * -power);
+            backLeft.setPower(gamepad1.left_stick_y * power);
+            backRight.setPower(gamepad1.right_stick_y * -power);
+            fire.setPower(0);
+            tread.setPower(0);
 
-        if (gamepad1.dpad_left) {
+        if (gamepad2.right_bumper) {
+            fire.setPower(0.7);
+        }
+        if(gamepad2.left_bumper){
+            fire.setPower(-0.7);
+        }
+        if (gamepad2.y) {
+            tread.setPower(-power2);
+        }
+        if(gamepad2.a){
+            tread.setPower(power2);
+        }
 
-            frontLeft.setPower(-power);
+        if (gamepad1.left_bumper) {
+
+            frontLeft.setPower(power);
             frontRight.setPower(power);
-            backLeft.setPower(power);
+            backLeft.setPower(-power);
             backRight.setPower(-power);
 
         }
 
-        if (gamepad1.dpad_right) {
+        if (gamepad1.right_bumper) {
 
-            frontLeft.setPower(power);
+            frontLeft.setPower(-power);
             frontRight.setPower(-power);
-            backLeft.setPower(-power);
+            backLeft.setPower(power);
             backRight.setPower(power);
 
         }
 
         if (gamepad1.dpad_up) {
 
-            frontLeft.setPower(power);
+
+            frontLeft.setPower(-power);
             frontRight.setPower(power);
-            backLeft.setPower(power);
+            backLeft.setPower(-power);
             backRight.setPower(power);
 
         }
 
         if (gamepad1.dpad_down) {
 
-            frontLeft.setPower(-power);
+            frontLeft.setPower(power);
             frontRight.setPower(-power);
-            backLeft.setPower(-power);
+            backLeft.setPower(power);
             backRight.setPower(-power);
 
         }
 
-        if (gamepad1.a && !toggle) {
-            toggle = false;
-            if (toggle) {
-                power /= 2;
-                toggle = false;
-            }
-            else if (gamepad1.a && toggle) {
-                power *= 2;
-                toggle = false;
-            }
+//            if (gamepad1.b && tap == 0) {
+//                power = power/2;
+//                tap = 1;
+//            }
+//            if (gamepad1.b && tap == 1) {
+//                power = power * 2;
+//                tap = 0;
+//            }
+        if (gamepad2.b) {
+            power2 = 0.7;
         }
+        if (gamepad2.x) {
+            power2 = 0.5;
+        }
+        if (gamepad1.b) {
+            power = 0.7;
+        }
+        if (gamepad1.a) {
+            power = 1.0;
+        }
+
+//        while(start && toggle) {
+//            if (gamepad1.a) {
+//                tap++;
+//                power /= 2;
+//            }
+//            if(gamepad1.b){
+//                toggle = true;
+//            }
+//            while (tap == 1) {
+//                power /= 2;
+//                tap = 0;
+//            }
+//            if (gamepad1.a && tap == 0) {
+//                power *= 2;
+//                tap = 0;
+//            }
+//            toggle = false;
+//        }
+
+        telemetry.addData("Current Toggle Value for Ethan: ", power);
+        telemetry.addData("Current Toggle Value for Alicia: ", power2);
+
     }
+
 }
