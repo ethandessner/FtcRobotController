@@ -14,6 +14,7 @@ public class teleOpMode extends OpMode {
     int tap = 0;
 //    boolean start = false;
     double power2 = 1.0;
+    double powerFire = 0.0;
 
     @Override
     public void init() {
@@ -39,10 +40,10 @@ public class teleOpMode extends OpMode {
             tread.setPower(0);
 
         if (gamepad2.right_bumper) {
-            fire.setPower(0.7);
+            fire.setPower(powerFire);
         }
         if(gamepad2.left_bumper){
-            fire.setPower(-0.7);
+            fire.setPower(-powerFire);
         }
         if (gamepad2.y) {
             tread.setPower(-power2);
@@ -108,6 +109,19 @@ public class teleOpMode extends OpMode {
         if (gamepad1.a) {
             power = 1.0;
         }
+        if(gamepad2.dpad_up){
+            powerFire = 1.0;
+        }
+        if(gamepad2.dpad_right) {
+            powerFire = 0.85;
+        }
+        if(gamepad2.dpad_left){
+            powerFire = 0.7;
+        }
+        if(gamepad2.dpad_down){
+            powerFire = 0.5;
+        }
+
 
 //        while(start && toggle) {
 //            if (gamepad1.a) {
@@ -130,6 +144,7 @@ public class teleOpMode extends OpMode {
 
         telemetry.addData("Current Toggle Value for Ethan: ", power);
         telemetry.addData("Current Toggle Value for Alicia: ", power2);
+        telemetry.addData("Current Toggle Value for Fire Power: ", powerFire);
 
     }
 
