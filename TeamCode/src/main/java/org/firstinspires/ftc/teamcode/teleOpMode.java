@@ -158,5 +158,4 @@ public class teleOpMode extends OpMode {
         telemetry.addData("Current Toggle Value for Fire Power: ", powerFire);
 
     }
-
 }
