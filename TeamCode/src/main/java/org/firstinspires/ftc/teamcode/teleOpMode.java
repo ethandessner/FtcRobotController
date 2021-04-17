@@ -23,7 +23,7 @@ public class teleOpMode extends OpMode {
         backLeft = hardwareMap.dcMotor.get("Back Left");
         backRight = hardwareMap.dcMotor.get("Back Right");
         tread = hardwareMap.dcMotor.get("Tread");
-        fire = hardwareMap.dcMotor.get("Fire");
+        fire = hardwareMap.dcMotor.get("Fire"); // fly wheel
 //        start = true;
 //        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 //        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -32,10 +32,16 @@ public class teleOpMode extends OpMode {
     @Override
     public void loop() {
 
+            /*
             frontLeft.setPower(gamepad1.left_stick_y * power);
             frontRight.setPower(gamepad1.right_stick_y * -power);
             backLeft.setPower(gamepad1.left_stick_y * power);
             backRight.setPower(gamepad1.right_stick_y * -power);
+*/
+            frontLeft.setPower(gamepad1.left_stick_y * -power);
+            frontRight.setPower(gamepad1.right_stick_y * power);
+            backLeft.setPower(gamepad1.left_stick_y * -power);
+            backRight.setPower(gamepad1.right_stick_y * power);
             fire.setPower(0);
             tread.setPower(0);
 
@@ -116,7 +122,7 @@ public class teleOpMode extends OpMode {
             powerFire = 0.85;
         }
         if(gamepad2.dpad_left){
-            powerFire = 0.7;
+            powerFire = 0.75;
         }
         if(gamepad2.dpad_down){
             powerFire = 0.5;

@@ -76,15 +76,18 @@ public class AutoEpicTime extends LinearOpMode{
     //    }
     }
     public void move(){
-                frontLeft.setPower(-power);
 
-                frontRight.setPower(power);
-                backLeft.setPower(-power);
-                backRight.setPower(power);
-                sleep( 4000);
-                frontLeft.setPower(0);
-                frontRight.setPower(0);
-                backLeft.setPower(0);
-                backRight.setPower(0);
+        frontLeft.setPower(-power);
+        frontRight.setPower(power);
+        backLeft.setPower(-power);
+        backRight.setPower(power);
+        sleep( 4000);
+        frontLeft.setPower(0);
+        frontRight.setPower(0);
+        backLeft.setPower(0);
+        backRight.setPower(0);
     }
 }
+
+// leave strafe
+//

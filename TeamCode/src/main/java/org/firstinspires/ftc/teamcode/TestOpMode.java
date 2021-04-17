@@ -44,8 +44,6 @@ public class TestOpMode extends LinearOpMode{
             turnR = -this.gamepad1.right_stick_x;
             throttle = throttle*.25;
 
-
-
             rampLeft.setPower(throttle);
             rampRight.setPower(throttle);
 
@@ -61,3 +59,4 @@ public class TestOpMode extends LinearOpMode{
         }
     }
 }
+
