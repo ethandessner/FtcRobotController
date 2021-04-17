@@ -3,11 +3,15 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.VoltageSensor;
 
 @TeleOp
 public class teleOpMode extends OpMode {
 
     DcMotor frontLeft, frontRight, backLeft, backRight, tread, fire;
+    VoltageSensor vs = hardwareMap.voltageSensor.get("name of usb motor controller");
+    double voltage = vs.getVoltage();
+
 
     double power = 1.0;
     boolean toggle = true;
@@ -148,6 +152,7 @@ public class teleOpMode extends OpMode {
 //            toggle = false;
 //        }
 
+        telemetry.addData("Voltage: ", vs.getVoltage() );
         telemetry.addData("Current Toggle Value for Ethan: ", power);
         telemetry.addData("Current Toggle Value for Alicia: ", power2);
         telemetry.addData("Current Toggle Value for Fire Power: ", powerFire);
