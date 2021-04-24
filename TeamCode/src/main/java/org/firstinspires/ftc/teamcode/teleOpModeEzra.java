@@ -3,14 +3,13 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.VoltageSensor;
 
 @TeleOp
 public class teleOpModeEzra extends OpMode {
 
     DcMotor frontLeft, frontRight, backLeft, backRight, tread, fire;
-    VoltageSensor vs = hardwareMap.voltageSensor.get("name of usb motor controller");
-    double voltage = vs.getVoltage();
+    //VoltageSensor vs = hardwareMap.voltageSensor.get("name of usb motor controller");
+   // double voltage = vs.getVoltage();
 
 
     double power = 1.0;
@@ -42,10 +41,10 @@ public class teleOpModeEzra extends OpMode {
             backLeft.setPower(gamepad1.left_stick_y * power);
             backRight.setPower(gamepad1.right_stick_y * -power);
 */
-        frontLeft.setPower(gamepad1.left_stick_y * power);
-        frontRight.setPower(gamepad1.right_stick_y * -power);
-        backLeft.setPower(gamepad1.left_stick_y * power);
-        backRight.setPower(gamepad1.right_stick_y * -power);
+        frontLeft.setPower(gamepad1.left_stick_y * -power);
+        frontRight.setPower(gamepad1.right_stick_y * power);
+        backLeft.setPower(gamepad1.left_stick_y * -power);
+        backRight.setPower(gamepad1.right_stick_y * power);
         fire.setPower(0);
         tread.setPower(0);
 
@@ -122,18 +121,19 @@ public class teleOpModeEzra extends OpMode {
         if (gamepad1.a) {
             power = 1.0;
         }
-        if(gamepad2.dpad_up){
-            powerFire = 1.0;
-        }
-        if(gamepad2.dpad_right) {
+        if(gamepad2.dpad_up) {
             powerFire = 0.85;
         }
-        if(gamepad2.dpad_left){
-            powerFire = 0.75;
+        if(gamepad2.dpad_right){
+            powerFire = 0.80;
         }
         if(gamepad2.dpad_down){
-            powerFire = 0.8;
+            powerFire = 0.75;
         }
+        if(gamepad2.dpad_left){
+            powerFire = 0.70;
+        }
+
 
 
 //        while(start && toggle) {
@@ -155,7 +155,7 @@ public class teleOpModeEzra extends OpMode {
 //            toggle = false;
 //        }
 
-        telemetry.addData("Voltage: ", vs.getVoltage() );
+      //  telemetry.addData("Voltage: ", vs.getVoltage() );
         telemetry.addData("Current Toggle Value for Ethan: ", power);
         telemetry.addData("Current Toggle Value for Alicia: ", power2);
         telemetry.addData("Current Toggle Value for Fire Power: ", powerFire);
